@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -15,6 +16,7 @@ public class Player_Movement : MonoBehaviour
     Rigidbody2D rb;
     bool grounded = false;
     bool jump = false;
+    public PersistantData persistantData;
 
 
 
@@ -23,6 +25,7 @@ public class Player_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
+        persistantData = new PersistantData();
     }
 
     // Update is called once per frame
@@ -67,5 +70,13 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coins"))
+        {
+            persistantData.PlayerCoins ++;
+            Destroy(other.gameObject);
+        }
+    }
 
 }

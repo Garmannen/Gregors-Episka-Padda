@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PersistantData : MonoBehaviour
 {
-    public int PlayerCoins;
+    public int PlayerCoins = 0;
+    //public bool "item" = false;
 
     // Start is called before the first frame update
     void Start()
