@@ -28,7 +28,7 @@ public class Pickup : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
 
-
+            
 
         }
 
