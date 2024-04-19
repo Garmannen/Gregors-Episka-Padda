@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +20,7 @@ public class Player_Movement : MonoBehaviour
     bool jump = false;
     public PersistantData persistantData;
 
+    [SerializeField] TextMeshProUGUI CoinText;
 
 
     // Start is called before the first frame update
@@ -26,6 +29,8 @@ public class Player_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         persistantData = new PersistantData();
+
+        //CoinText = GetComponent<TextMeshProUGUI>;
     }
 
     // Update is called once per frame
@@ -74,9 +79,14 @@ public class Player_Movement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coins"))
         {
-            persistantData.PlayerCoins ++;
+            persistantData.PlayerCoins++;
             Destroy(other.gameObject);
         }
     }
 
+    private void PrintText()
+    {
+        CoinText.text = "Coins " + persistantData.PlayerCoins;
+        Debug.Log("Text: " + persistantData.PlayerCoins);
+    }
 }
