@@ -82,12 +82,12 @@ public class Player_Movement : MonoBehaviour
         {
             persistantData.PlayerCoins++;
             Destroy(other.gameObject);
+            //Debug.Log("Text: " + persistantData.PlayerCoins);
         }
     }
 
     private void PrintText()
     {
         CoinText.text = "Coins " + persistantData.PlayerCoins;
-        Debug.Log("Text: " + persistantData.PlayerCoins);
     }
 }
