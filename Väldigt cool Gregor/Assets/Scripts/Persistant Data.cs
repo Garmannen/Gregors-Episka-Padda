@@ -19,4 +19,17 @@ public class PersistantData : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    void Awake()
+    {
+        int numGameSession = FindObjectsOfType<PersistantData>().Length;
+        if (numGameSession > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 }
