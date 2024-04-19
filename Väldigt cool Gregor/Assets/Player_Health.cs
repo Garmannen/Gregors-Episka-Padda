@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Player_Health : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class Player_Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        playerHealth = 20;
     }
 
     // Update is called once per frame
@@ -17,7 +19,7 @@ public class Player_Health : MonoBehaviour
     {
         if (playerHealth <= 0)
         {
-            //Restarta spelet
+            //SceneManager.LoadScene(0);
         }
     }
 }
