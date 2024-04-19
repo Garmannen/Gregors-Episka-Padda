@@ -5,7 +5,7 @@ using UnityEngine;
 public class PersistantData : MonoBehaviour
 {
     public int PlayerCoins = 0;
-    public bool speedBoost = false;
+    public int speedBoost = 0;
     //public bool "item" = false;
 
     // Start is called before the first frame update
