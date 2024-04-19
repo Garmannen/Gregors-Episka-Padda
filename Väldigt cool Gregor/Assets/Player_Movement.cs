@@ -10,8 +10,8 @@ using UnityEngine.InputSystem;
 
 public class Player_Movement : MonoBehaviour
 {
-    [SerializeField] float speed = 3;
-    [SerializeField] float jumpForce = 3;
+    public float speed = 3;
+    public float jumpForce = 3;
     [SerializeField] ContactFilter2D groundFilter;
     Vector2 inputDir;
     CapsuleCollider2D coll;
