@@ -22,16 +22,15 @@ public class Pickup : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (collision.gameObject.CompareTag("Player"))
-        {
+        
 
-            
-
-        }
-
+            Destroy(gameObject, 0.0f);
+        Debug.Log("ASa");
+        
     }
 
 }
