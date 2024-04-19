@@ -6,13 +6,13 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
 
-
+    private PersistantData persisntatData;
 
     // Start is called before the first frame update
     void Start()
     {
-        
 
+        
 
     }
 
@@ -26,11 +26,17 @@ public class Pickup : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        
+        if (CompareTag("Player"))
+        {
 
             Destroy(gameObject, 0.0f);
-        Debug.Log("ASa");
-        
+
+            persisntatData.speedBoost = 2;
+
+        }
+
+
     }
+
 
 }
