@@ -46,6 +46,8 @@ public class Player_Movement : MonoBehaviour
         {
             Jump();
         }
+
+        PrintText();
     }
 
     public void SetMoveDir(InputAction.CallbackContext context)
