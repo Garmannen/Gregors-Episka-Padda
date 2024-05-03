@@ -96,6 +96,6 @@ public class Player_Movement : MonoBehaviour
 
     private void PrintText()
     {
-        CoinText.text = "Coins " + persistantData.PlayerCoins;
+        CoinText.text = "Coins: " + persistantData.PlayerCoins;
     }
 }
