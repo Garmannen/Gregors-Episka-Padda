@@ -86,6 +86,12 @@ public class Player_Movement : MonoBehaviour
             Destroy(other.gameObject);
             //Debug.Log("Text: " + persistantData.PlayerCoins);
         }
+        if (other.gameObject.CompareTag("SpeedBoost"))
+        {
+            persistantData.speedBoost = persistantData.speedBoost + 4;
+            Destroy(other.gameObject);
+            Debug.Log("Text: " + speed);
+        }
     }
 
     private void PrintText()
