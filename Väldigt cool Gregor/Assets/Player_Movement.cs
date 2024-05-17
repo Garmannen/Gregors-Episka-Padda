@@ -36,7 +36,7 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed = 12 + persistantData.speedBoost;
+        speed = speed + persistantData.speedBoost;
 
         rb.velocity = new Vector2(inputDir.x * speed, rb.velocity.y);
 
