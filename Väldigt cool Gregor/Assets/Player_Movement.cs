@@ -19,6 +19,13 @@ public class Player_Movement : MonoBehaviour
     bool grounded = false;
     bool jump = false;
     public PersistantData persistantData;
+    public Vector2 mousePos;
+
+    //Gun variables
+    [SerializeField] private GameObject bulletprefab;
+    [SerializeField] private Transform Firingpoint;
+    [Range(0.1f, 1f)][SerializeField] private float fireRate = 0.5f;
+
 
     [SerializeField] TextMeshProUGUI CoinText;
 
@@ -36,7 +43,15 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         speed = speed + persistantData.speedBoost;
+=======
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+
+        speed = 12 + persistantData.speedBoost;
+>>>>>>> Stashed changes
 
         rb.velocity = new Vector2(inputDir.x * speed, rb.velocity.y);
 
