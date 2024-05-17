@@ -46,6 +46,8 @@ public class Player_Movement : MonoBehaviour
         {
             Jump();
         }
+
+        PrintText();
     }
 
     public void SetMoveDir(InputAction.CallbackContext context)
@@ -82,12 +84,18 @@ public class Player_Movement : MonoBehaviour
         {
             persistantData.PlayerCoins++;
             Destroy(other.gameObject);
+            //Debug.Log("Text: " + persistantData.PlayerCoins);
+        }
+        if (other.gameObject.CompareTag("SpeedBoost"))
+        {
+            persistantData.speedBoost = persistantData.speedBoost + 4;
+            Destroy(other.gameObject);
+            Debug.Log("Text: " + speed);
         }
     }
 
     private void PrintText()
     {
-        CoinText.text = "Coins " + persistantData.PlayerCoins;
-        Debug.Log("Text: " + persistantData.PlayerCoins);
+        CoinText.text = "Coins: " + persistantData.PlayerCoins;
     }
 }
