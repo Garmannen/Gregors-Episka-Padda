@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [Range(1, 10)] [SerializeField] private float speed = 10f;
+    [SerializeField] private float speed = 1000f;
 
-    [Range(1, 10)] [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private float lifeTime = 10f;
 
     
     
@@ -24,5 +25,35 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = transform.up * speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("Ladder"))
+        {
+
+        }
+        else if (other.gameObject.CompareTag("SpeedBoost"))
+        {
+
+        }
+        else if (other.gameObject.CompareTag("Coins"))
+        {
+
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 
 }

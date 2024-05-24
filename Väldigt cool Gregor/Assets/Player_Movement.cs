@@ -7,6 +7,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -18,13 +20,15 @@ public class Player_Movement : MonoBehaviour
     Rigidbody2D rb;
     bool grounded = false;
     bool jump = false;
-    public PersistantData persistantData;
     public Vector2 mousePos;
+    
 
     //Gun variables
     [SerializeField] private GameObject bulletprefab;
     [SerializeField] private Transform Firingpoint;
     [Range(0.1f, 1f)][SerializeField] private float fireRate = 0.5f;
+
+    private float fireTimer;
 
 
     [SerializeField] TextMeshProUGUI CoinText;
@@ -35,7 +39,9 @@ public class Player_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
-        persistantData = new PersistantData();
+        //PersistantData = new PersistantData();
+        
+
 
         //CoinText = GetComponent<TextMeshProUGUI>;
     }
@@ -43,15 +49,15 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-        speed = speed + persistantData.speedBoost;
-=======
+
+        speed = speed + PersistantData.speedBoost;
+
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
 
-        speed = 12 + persistantData.speedBoost;
->>>>>>> Stashed changes
+        speed = 12 + PersistantData.speedBoost;
+
 
         rb.velocity = new Vector2(inputDir.x * speed, rb.velocity.y);
 
@@ -61,6 +67,18 @@ public class Player_Movement : MonoBehaviour
         {
             Jump();
         }
+
+        if (Input.GetMouseButtonDown(0) && fireTimer <= 0f)
+        {
+            Shoot();
+            fireTimer = fireRate;
+        }
+        else
+        {
+            fireTimer -= Time.deltaTime;
+        }
+
+        
 
         PrintText();
     }
@@ -97,20 +115,38 @@ public class Player_Movement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coins"))
         {
-            persistantData.PlayerCoins++;
+            PersistantData.PlayerCoins++;
             Destroy(other.gameObject);
             //Debug.Log("Text: " + persistantData.PlayerCoins);
         }
         if (other.gameObject.CompareTag("SpeedBoost"))
         {
-            persistantData.speedBoost = persistantData.speedBoost + 4;
+            PersistantData.speedBoost = PersistantData.speedBoost + 4;
             Destroy(other.gameObject);
             Debug.Log("Text: " + speed);
         }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+            PersistantData.playerHealth--;
+        }
+        if (other.gameObject.CompareTag("Teleporter"))
+        {
+            
+            SceneManager.LoadScene(1);
+            
+        }
     }
+
+    
 
     private void PrintText()
     {
-        CoinText.text = "Coins: " + persistantData.PlayerCoins;
+        CoinText.text = "Coins: " + PersistantData.PlayerCoins;
+    }
+
+    private void Shoot()
+    {
+        Instantiate(bulletprefab, Firingpoint.position, Firingpoint.rotation);
     }
 }
